@@ -95,8 +95,12 @@
 
             let pricee1=document.getElementById('price');
             let pricee2=document.getElementById('price2');
+            let filter1 = parray.product;
+            if(document.getElementById("products").options[document.getElementById("products").selectedIndex].text!='請選擇類別'){
+                filter1 =parray.product.filter(word => word.ProductType == document.getElementById("products").options[document.getElementById("products").selectedIndex].text);
+            }
 
-            let filter1 =parray.product.filter(word => word.ProductType == document.getElementById("products").options[document.getElementById("products").selectedIndex].text);
+            
             let filtert = filter1;
             if(pricee1.value && pricee2.value){
                 let filter2 = filter1.filter(p => p.Price < pricee1.value && p.Price > pricee2.value);
