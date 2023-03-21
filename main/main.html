@@ -18,6 +18,7 @@
                 width: 100%;
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 10px;
             }
         </style>
 </head>
@@ -31,7 +32,12 @@
             <option  value="food" selected>飲料</option>
             <option  value="drink">食品</option>
         </select>
-        <button id="btn">Click</button>
+    </div>
+    <div class="box">
+        <input type="text" id="price"> > 價格 > <input type="text" id="price2">
+    </div>
+    <div class="box">
+        <button id="btn">搜尋</button>
     </div>
     <div id="container">
 
@@ -72,9 +78,17 @@
 
             CreateThead(parray.Titles);
 
-            let vv =parray.product.filter(word => word.ProductType == document.getElementById("products").options[document.getElementById("products").selectedIndex].text);
+            let pricee1=document.getElementById('price');
+            let pricee2=document.getElementById('price2');
+
+            let filter1 =parray.product.filter(word => word.ProductType == document.getElementById("products").options[document.getElementById("products").selectedIndex].text);
+            let filtert = filter1;
+            if(pricee1.value && pricee2.value){
+                let filter2 = filter1.filter(p => p.Price < pricee1.value && p.Price > pricee2.value);
+                filtert = filter2;
+            }
             
-            vv.forEach(item => {
+            filtert.forEach(item => {
                 let values = Object.values(item);
                 GlobalCountry2dArray.push(values);
             });
